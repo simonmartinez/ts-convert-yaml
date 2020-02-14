@@ -1,0 +1,15 @@
+{
+  "name": "convert-yaml",
+  "version": "1.0.0",
+  "description": "JS object/array to YAML",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "author": "Simon Martinez",
+  "license": "MIT",
+  "dependencies": {
+    "typescript": "^3.7.5"
+  }
+}
