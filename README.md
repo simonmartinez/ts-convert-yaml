@@ -9,6 +9,13 @@ https://www.npmjs.com/package/convert-yaml
 $ npm install convert-yaml --save
 ```
 
+## Participate
+Build: 
+```
+$ npm run build
+$ npm publish
+```
+
 ## Usage
 
 ```

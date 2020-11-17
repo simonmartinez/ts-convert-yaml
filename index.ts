@@ -60,9 +60,7 @@ export default class JSToYaml {
         }
         break;
       case YamlType.multilines:
-        data.split('\n').forEach((s: string) => {
-          arr.push(s);
-        });
+        arr.push(JSON.stringify(data));
         break;
       case YamlType.null:
         arr.push('null');
@@ -119,13 +117,8 @@ export default class JSToYaml {
           case YamlType.null:
           case YamlType.number:
           case YamlType.boolean:
-            arr.push(`${this.normalizeString(k)}: ${arrItems[0]}`);
-            break;
           case YamlType.multilines:
-            arr.push(`${this.normalizeString(k)}: |-`);
-            arrItems.forEach((s) => {
-              arr.push(this.spacing + s);
-            });
+            arr.push(`${this.normalizeString(k)}: ${arrItems[0]}`);
             break;
           default:
             arr.push(this.normalizeString(k) + ': ');
