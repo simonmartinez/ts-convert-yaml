@@ -20,7 +20,5 @@ $ npm publish
 
 ```
 import JSToYaml from 'convert-yaml';
-JSToYaml.spacing = ' '.repeat(4);
-JSToYaml.spacingStart = '';
 const text: string = JSToYaml.stringify(myObjectToConvert).value;
 ```
