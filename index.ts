@@ -6,6 +6,7 @@ enum YamlType {
   number = 'number',
   null = 'null',
   object = 'object',
+  emptyObject = 'emptyObject',
 };
 
 export class JSToYamlResult {
@@ -66,6 +67,9 @@ export default class JSToYaml {
             result.value += '[]\n';
           }
           break;
+        case YamlType.emptyObject:
+          result.value += `{}\n`;
+          break;
         default:
           result.value += '\n';
           this.convertFromObject(value, result, deep + 1);
@@ -79,7 +83,7 @@ export default class JSToYaml {
       if (data.hasOwnProperty(propertyName)) {
         const value = data[propertyName] as any;
         const type: YamlType = this.getType(value);
-        result.value += `${this.spacingStart}${this.spacing.repeat(deep)}${this.normalizeString(propertyName)}: `;
+        result.value += `${this.spacingStart}${this.spacing.repeat(deep)}${this.normalizeKey(propertyName)}: `;
         switch (type) {
           case YamlType.null:
           case YamlType.number:
@@ -103,6 +107,9 @@ export default class JSToYaml {
               result.value += '[]\n';
             }
             break;
+          case YamlType.emptyObject:
+            result.value += `{}\n`;
+            break;
           default:
             result.value += '\n';
             this.convertFromObject(value, result, deep + 1);
@@ -110,6 +117,13 @@ export default class JSToYaml {
         }
       }
     }
+  }
+
+  private static normalizeKey(str: string): string {
+    if(str.indexOf(' ') > -1) {
+      return this.normalizeString(str);
+    }
+    return str;
   }
 
   private static normalizeString(str: string): string {
@@ -137,6 +151,9 @@ export default class JSToYaml {
       case 'undefined':
         return YamlType.null;
       default:
+        if (Object.keys(data).length === 0) {
+          return YamlType.emptyObject;
+        }
         return YamlType.object;
     }
   }

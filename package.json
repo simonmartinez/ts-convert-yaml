@@ -1,6 +1,6 @@
 {
   "name": "convert-yaml",
-  "version": "2.0.0",
+  "version": "2.0.5",
   "description": "JS object/array to YAML",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
